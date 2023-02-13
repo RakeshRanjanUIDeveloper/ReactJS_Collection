@@ -1,16 +1,14 @@
 import './App.css';
-import Apple from './components/Apple.js';
-import Header from './components/Header.js';
+import ContactForm from './components/ContactForm';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <h1 className="App-header">
-      <h2>Jaswanth Changed again</h2> 
-      <p>CRUD APP</p>
-      <Header/>
-      <Apple/>
-      </h1>
+        <Navbar />
+        <ContactForm />
+        <Footer />
     </div>
   );
 }
