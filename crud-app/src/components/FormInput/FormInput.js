@@ -1,5 +1,5 @@
 import React from 'react';
-import "./formInput.scss";
+import "./FormInput.scss";
 import { useState } from 'react';
 
 const FormInput = (props) => {

@@ -3,13 +3,7 @@ import './../Footer/Footer.scss';
 import footerlogo from '../../assets/images/logo.png'
 import * as Icon from 'react-bootstrap-icons'; 
 const Footer = () => {
-  const [linkHover, setLinkHover] = useState(false);
-  const onHover=()=>{
-    setLinkHover(true)
-  }
-  const onLeave=()=>{
-    setLinkHover(false)
-  }
+  const [isShown, setIsShown] = useState(false);
   return (
     <React.Fragment>
       <footer className="footer-sec">
@@ -20,7 +14,7 @@ const Footer = () => {
           </div>
           <div className="logo-des">
             <p>When the Earth is threatened by the evil Troobian empire, the SPD (Space Patrol Delta) police force recruits a team of Power Rangers to help defend the planet. </p>
-            <a href="#" className="btn-know">Know More</a>
+            <a href="JavaScript:void(0);" className="btn-know">Know More</a>
           </div>
         </div>
         <div className="office row">
@@ -35,13 +29,18 @@ const Footer = () => {
         </div>
         <div className="link row">
           <div className="footer-header">
-            <h3>Links</h3>
+            <h3>Contact US</h3>
           </div>
           <div className="link-des">
-            <a href="#" className="footer-links">{linkHover ? "Home" : <Icon.HouseAddFill size="40" onMouseEnter={onHover} onMouseLeave={onLeave} />}</a>
-            <a href="#" className="footer-links">{linkHover ? "Contact" : <Icon.TelephonePlusFill size="40" onMouseEnter={onHover} onMouseLeave={onLeave} />}</a>
-            <a href="#" className="footer-links">{linkHover ? "Calendar" : <Icon.Calendar2Check size="40" onMouseEnter={onHover} onMouseLeave={onLeave} />}</a>
-            <a href="#" className="footer-links">{linkHover ? "Chat" : <Icon.ChatDotsFill size="40" onMouseEnter={onHover} onMouseLeave={onLeave} />}</a>
+            <div>
+                <Icon.TelephonePlusFill size="40" href="#" className="footer-links" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}></Icon.TelephonePlusFill>
+                {isShown && <div>Call</div>}
+            </div>
+            <div>
+                <Icon.Mailbox2 size="40" href="#" className="footer-links" onMouseEnter={() => setIsShown(true)} onMouseLeave={() => setIsShown(false)}></Icon.Mailbox2>
+                {isShown && <div>Mail</div>}
+            </div>
+
           </div>
           
         </div>
@@ -49,7 +48,7 @@ const Footer = () => {
         
         <div className="newsletter row">
           <div className="footer-header">
-            <h3>Newsletter</h3>
+            <h3>Get Social</h3>
           </div>
           <div className="newsletter-des">
             <div className="subcribe"><i className="sub-icon ri-mail-check-fill"></i>

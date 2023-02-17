@@ -1,6 +1,6 @@
 import React from 'react'
 import FormInput from './FormInput';
-import "./formInput.scss";
+import "./FormInput.scss";
 import { useState, useRef } from 'react';
 
 const ContactForm = () => {
