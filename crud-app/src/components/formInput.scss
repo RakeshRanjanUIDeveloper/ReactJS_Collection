@@ -1,0 +1,68 @@
+.form-group{
+    display: flex;
+    // align-items: center;
+    justify-content:center;
+    // height: 100vh;
+    background-image: linear-gradient(to right, #8360c3, #2ebf91);
+}
+
+input {
+    padding: 15px;
+    margin: 10px 0 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+
+label{
+    font-size: 12px;
+    text-align: left;
+    color: gray;
+}
+
+.formInput{
+    display: flex;
+    flex-direction: column;
+    width: 280px;
+    span{
+        font-size: 12px;
+        padding: 3px 0;
+        color: red;
+        text-align: left;
+        margin-bottom: 5px;
+        display: none;
+    }
+}
+
+form{
+    background-color: #fff;
+    padding: 0px 60px;
+    border-radius: 10px;
+}
+
+form h1{
+    color: rgb(77,1,77);
+    text-align: center;
+    margin: 0.3em;
+}
+
+button{
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: none;
+    background-color: rebeccapurple;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.formInput input:invalid[focused="true"] ~ span{
+    display: block !important;
+}
+
+.formInput input:invalid[focused="true"]{
+    border-color: red;
+}
