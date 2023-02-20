@@ -24,7 +24,7 @@ const Footer = () => {
           <div className="office-des">
             <p>Karnataka<br />Bangalore<br />Marathahalli<br />560037</p>
             <a href="#">rakeshmodi034@gmail.com</a>
-            <p class = "num">+91-9986961101</p>
+            <p className = "num">+91-9986961101</p>
           </div>
         </div>
         <div className="link row">

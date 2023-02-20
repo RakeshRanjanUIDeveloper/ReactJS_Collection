@@ -1,0 +1,63 @@
+.contacts-navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #2a1b6c;
+    width: 40px;
+
+    a {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        position: relative;
+
+        .navbar-text {
+            font-size: 14px;
+            text-align: left;
+            color: #fff;
+            position: absolute;
+            text-decoration: none;
+            left: 100%;
+            transform: translate(-100%, 0);
+            opacity: 0;
+            transition: all 1s ease;
+        }
+
+        .navbar-icon {
+            min-width: 40px;
+            width: 40px;
+            height: 40px;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 0;
+            transition: margin-left 1s ease, border-radius 0.5s ease;
+
+            svg {
+                fill: #fff;
+                width: 100%;
+            }
+        }
+    }
+
+    a.active {
+        .navbar-text {
+            transform: translate(20px, 0px);
+            opacity: 1;
+        }
+
+        .navbar-icon {
+            margin-left: 15px;
+            background: #fff;
+            border-radius: 50%;
+
+            svg {
+                fill: #2a1b6c;
+            }
+
+
+        }
+    }
+}
