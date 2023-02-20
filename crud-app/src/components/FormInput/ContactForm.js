@@ -5,12 +5,7 @@ import { useState } from 'react';
 
 const ContactForm = () => {
 
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    fullname: "",
-    contact: ""
-  });
+  const [values, setValues] = useState({});
 
   const inputs = [
     {
