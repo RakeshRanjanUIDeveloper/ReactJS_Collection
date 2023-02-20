@@ -1,7 +1,7 @@
 import React from 'react'
 import FormInput from './FormInput';
 import "./FormInput.scss";
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 const ContactForm = () => {
 
@@ -70,8 +70,6 @@ const ContactForm = () => {
       required: true
     }
   ]
-
-  const usernameRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
