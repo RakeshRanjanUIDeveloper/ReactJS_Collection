@@ -1,3 +1,35 @@
-.mh200{
-    min-height: 210px
+.min-height{
+    min-height:100vh;
+  }
+
+  .header-block{
+    margin: 2% 0;
+
+    h1{
+      color: #fff;
+      font-size: 2em;
+    }
+    p{
+      color: #fff;
+      line-height: 1.3;
+      margin: 1% 0 2% 0;
+    }
+    img{
+      width: 25%;
+    margin: 5% auto 3%;
+    animation: jump 2s ease infinite alternate;
+    }
+    h2{
+      color: #d5f6ff;
+    }
+
+    @keyframes jump{
+      from{
+          padding-top: 1.5%
+      }
+      to{
+          padding-top:0;
+      }
+  }
+
   }

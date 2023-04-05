@@ -1,3 +1,31 @@
 .mh200{
     min-height: 210px
   }
+
+  .card-header {
+    margin: 2%;
+    font-size: 2em;
+    color: #Fff;
+    font-weight: 600;
+
+
+}
+
+.card-block{
+  display: flex;
+  flex-flow: wrap;
+  width: 84%;
+  margin: 0 auto 0 11%;
+  height: 87vh;
+  overflow-y: scroll;
+
+  .card-main {
+    flex: 0 0 30%;
+    margin: 1% 1%;
+    padding: 2%;
+    width: 8%;
+    background: #f9f9f9;
+    text-align: left;
+    border-left: 5px solid #2a1b6c;
+}
+}
