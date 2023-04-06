@@ -12,6 +12,6 @@ code {
     monospace;
 }
 
-.mh200{
-  min-height: 210px
+.min-height{
+  min-height:100vh;
 }
