@@ -1,31 +1,48 @@
-.mh200{
-    min-height: 210px
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+  width: 78%;
+  margin: 0 auto;
+  column-gap: 20px;
+  row-gap: 10px;
+
+  .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+  
+    li {
+      list-style-type: none;
+      border: 2px solid #bebebe;
+      font-size: 1.2vw;
+      color: #000;
+      font-family: Graphik;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+  }
+}
+
+
+
+.user-input-area {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+  align-items: center;
+  margin: 0 auto;
+
+  input {
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    height: 50px;
+    padding: 10px;
   }
 
-  .card-header {
-    margin: 2%;
-    font-size: 2em;
-    color: #Fff;
-    font-weight: 600;
-
-
-}
-
-.card-block{
-  display: flex;
-  flex-flow: wrap;
-  width: 84%;
-  margin: 0 auto 0 11%;
-  height: 87vh;
-  overflow-y: scroll;
-
-  .card-main {
-    flex: 0 0 30%;
-    margin: 1% 1%;
-    padding: 2%;
-    width: 8%;
-    background: #f9f9f9;
-    text-align: left;
-    border-left: 5px solid #2a1b6c;
-}
 }
