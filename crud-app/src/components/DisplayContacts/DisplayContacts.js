@@ -56,8 +56,12 @@ function DisplayContacts(props) {
     let pageArr = []
 
     if (state.page <= 4) {
-      pageArr = [1, 2, 3, 4, 5]
-    }
+       for (let i = 1; i <=5; i++)
+       { 
+        if(i <= state.totalPages)
+        { 
+          pageArr.push(i)
+         } } }
     else if (state.page >= (state.totalPages - 3)) {
       pageArr = [state.totalPages - 4, state.totalPages - 3, state.totalPages - 2, state.totalPages - 1, state.totalPages]
     }
