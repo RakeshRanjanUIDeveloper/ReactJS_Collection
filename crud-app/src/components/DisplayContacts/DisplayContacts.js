@@ -1,48 +1,82 @@
 import React, { useEffect, useState } from 'react'
 import './DisplayContacts.scss'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from '../../appRedux/contacts/ContactsActions';
 function DisplayContacts(props) {
+  const userData = useSelector(state => state.totalContacts)
+  const appState = useSelector(state => state)
+  const dispatch = useDispatch()
   const [state, setState] = useState({
     jsonData: [],
     filteredResult: [],
     searchInput: "",
     page: 1,
-    totalPages: 0
+    totalPages: 0,
+    pageArray: []
   })
 
+  useEffect(() => {
+    dispatch(fetchContacts('http://localhost:3031/users'))
+    console.log(appState)
+  }, [])
   useEffect(() => {
     let somedata = [];
     if (state.searchInput !== '') {
       const filteredData = state.jsonData.filter((contact) => {
-        return contact.firstName.toLowerCase().includes(state.searchInput.toLowerCase())
+        return contact.username.toLowerCase().includes(state.searchInput.toLowerCase())
       })
       somedata = filteredData;
     }
     else {
       somedata = state.jsonData
     }
-
     setState(state => ({
       ...state, filteredResult: somedata
     }))
-    console.log(state)
-  }, [state.searchInput]);
+
+  }, [state.searchInput, state.jsonData]);
 
   useEffect(() => {
-    const getContactsData = async () => {
-      const data = await fetch("https://dummyjson.com/users?limit=100");
-      const data1 = await data.json();
-      const json = data1.users;
-      setState(state => ({
-        ...state, jsonData: json
-      }))
-    }
-    getContactsData();
-  }, [])
+    // const getContactsData = async () => {
+    //   const data = await fetch("https://dummyjson.com/users?limit=100");
+    //   const data1 = await data.json();
+    //   const json = data1.users;
+    //   setState(state => ({
+    //     ...state, jsonData: json
+    //   }))
+    // }
+    // getContactsData();
 
+    setState(state => ({
+      ...state, jsonData: userData
+    }))
+  }, [userData])
+
+  useEffect(() => {
+    let pageArr = []
+
+    if (state.page <= 4) {
+       for (let i = 1; i <=5; i++)
+       { 
+        if(i <= state.totalPages)
+        { 
+          pageArr.push(i)
+         } } }
+    else if (state.page >= (state.totalPages - 3)) {
+      pageArr = [state.totalPages - 4, state.totalPages - 3, state.totalPages - 2, state.totalPages - 1, state.totalPages]
+    }
+    else {
+      pageArr = [state.page - 2, state.page - 1, state.page, state.page + 1, state.page + 2,]
+    }
+    setState(state => ({
+      ...state, pageArray: pageArr
+    }))
+  }, [state.page, state.totalPages])
   useEffect(() => {
     setState(state => ({
       ...state, filteredResult: state.jsonData
     }))
+
   }, [state.jsonData])
 
   useEffect(() => {
@@ -50,7 +84,6 @@ function DisplayContacts(props) {
     setState(state => ({
       ...state, totalPages: count, page: 1
     }))
-    console.log(count)
   }, [state.filteredResult])
 
 
@@ -62,81 +95,56 @@ function DisplayContacts(props) {
 
   const selectedPageHandler = (selectedPage) => {
     console.log(selectedPage)
+
     if (selectedPage >= 1 && selectedPage <= state.totalPages && selectedPage !== state.page)
       setState(state => ({
         ...state, page: selectedPage
       }))
   }
-
-  //Gender filter
-
-
-const genderCount = {};
-  state.filteredResult.forEach(function(i){
-    genderCount[i.gender] ? genderCount[i.gender]++ : genderCount[i.gender] = 1;
-  });
-  console.log(genderCount)
-  console.log(genderCount.male, genderCount.female)
-  let message= " ";
-  if(state.searchInput === ""){
-    message= <p>Let's Find your Male & Female Friends</p>;
-  }
-  else{
-    if(genderCount.male > 0){
-      if(genderCount.female >0){
-        message = <p>You have {genderCount.male} Male and {genderCount.female} Female Friends</p>
-      }else{
-        message =<p>You have only {genderCount.male} male friends</p>
-      }
-    }
-    else if(genderCount.female > 0){
-      if(genderCount.male >0){
-        message = <p>You have {genderCount.male} Male and {genderCount.female} Female Friends</p>
-      }else{
-        message =<p>You have only {genderCount.female} female friends</p>
-      }
-    }
-    else{
-      message= <p>Your friend's name does not exist in our records </p>;
-    }
-  }
-
-
-
-
-
   return (
-    <div className="mh200">
-      <div className='user-input-area'>
-        <input type="text" placeholder='search here...' value={state.searchInput} onChange={onchange} />
-        {message}
-      </div>
-      <div>
-      
-      </div>
-      <div className='flex-container'>
+    <div className="mh200">    <div className='user-input-area'>
+      <input type="text" placeholder='search here...' value={state.searchInput} onChange={onchange} />
+    </div>
+      <div className='grid-container'>
         {
-          state.filteredResult.slice(state.page * 10 - 10, state.page * 10).map((contact) => {
+          state.filteredResult.slice(state.page * 10 - 10, state.page * 10).map((contact, i) => {
             return (
-              <div className='flex-item' key={contact.id}>
-                <li><b>User Name : </b>{contact.firstName}</li>
-                <li><b>Email: </b>{contact.email}</li>
-                <li><b>Gender: </b>{contact.gender}</li>
+              <div className='grid-item' key={i}>
+                <div className="innergrid">
+                  <p><b>User Name:</b></p>
+                  <p>{contact.username}</p>
+                </div>
+                <div className="innergrid">
+                  <p><b>Email:</b></p>
+                  <p>{contact.email}</p>
+                </div>
+                <div className="innergrid">
+                  <p><b>DOB:</b></p>
+                  <p>{contact.DOB}</p>
+                </div>
+                <div className="innergrid">
+                  <p><b>Number:</b></p>
+                  <p>{contact.contact}</p>
+                </div>
               </div>
             )
           })
         }
-      </div>
-   
+
+      </div> {state.totalPages > 0 && <div className='pagination'>
+        <span className={state.page > 1 ? "" : "pagination__disable"} onClick={() => selectedPageHandler(state.page - 1)}>Previous</span>
         {
-          state.totalPages > 0 && <div className='pagination'>
-            <span className={state.page > 1 ? "" : "pagination__disable"} onClick={() => selectedPageHandler(state.page - 1)}>Previous</span>
-            {[...Array(state.totalPages)].map((_, i) =>{
-                  return <span className={state.page === i+1 ? "pagination__selected" : ""} key={i} onClick={() => selectedPageHandler(i+1)} >{i+1}</span>
-              })} 
-            <span className={state.page < state.totalPages ? "" : "pagination__disable"} onClick={() => selectedPageHandler(state.page + 1)}>Next</span>
-          </div>
+          state.page <= 4 ? <></> : <><span className={state.page === 1 ? "pagination__selected" : ""} onClick={() => selectedPageHandler(1)} >{1}</span><span>...</span></>
         }
-      </div>)
+        {state.pageArray.map((p, i) => {
+          return <span className={state.page === p ? "pagination__selected" : ""} key={i} onClick={() => selectedPageHandler(p)} >{p}</span>
+        })}
+        {
+          state.page >= (state.totalPages - 3) ? <></> : <><span>...</span><span className={state.page === state.totalPages ? "pagination__selected" : ""} onClick={() => selectedPageHandler(state.totalPages)} >{state.totalPages}</span></>
+        }
+        <span className={state.page < state.totalPages ? "" : "pagination__disable"} onClick={() => selectedPageHandler(state.page + 1)}>Next</span>
+        <input type="text" onChange={(e) => { e.target.value ? selectedPageHandler(parseInt(e.target.value)) : selectedPageHandler(1) }}></input>
+      </div>
+      }   </div>)
 }
 export default DisplayContacts
