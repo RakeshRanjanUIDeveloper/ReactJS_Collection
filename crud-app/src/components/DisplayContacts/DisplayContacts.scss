@@ -21,11 +21,11 @@ $grid-width : 20%;
       justify-content: flex-start;
       overflow: hidden;
 
-      p:nth-child(1){
+      p:nth-child(1) {
         width: 33%;
       }
 
-      p{
+      p {
         width: 67%;
         text-align: left;
         text-overflow: ellipsis;
@@ -53,6 +53,43 @@ $grid-width : 20%;
     margin-bottom: 30px;
     height: 50px;
     padding: 10px;
+  }
+
+  .gender-input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    height: 50px;
+
+    div{
+      width: 50px;
+      height: 50px;
+      padding: 0.5vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #fff;
+      cursor: pointer;
+
+      &.gender-male{
+        border-right: none;
+      }
+
+      &.active{
+        background: #FFF;
+
+        svg{
+          fill: #000;
+        }
+      }
+
+      svg{
+        width: 50%;
+      }
+    }
+    
   }
 
 }
