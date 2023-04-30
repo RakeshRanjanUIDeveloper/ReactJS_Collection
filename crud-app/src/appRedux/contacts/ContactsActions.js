@@ -27,7 +27,6 @@ export const fetchContacts = (url) => {
         axios.get(url)
         .then(response => {
             const users = response.data;
-            console.log(users)
             dispatch(loadContactsSuccess(users));
         }).catch(err => {
             const error = err.message;

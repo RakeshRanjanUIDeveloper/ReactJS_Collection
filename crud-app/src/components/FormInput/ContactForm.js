@@ -36,7 +36,7 @@ const ContactForm = () => {
     },
     {
       id: 4,
-      name: "Contact",
+      name: "contact",
       type: "tel",
       placeholder: "Contact Number",
       errorMessage: "Contact Number must be of 10 digits and only contain numbers",
@@ -46,34 +46,41 @@ const ContactForm = () => {
     },
     {
       id: 5,
-      name: "Password",
-      type: "password",
-      placeholder: "Password",
-      errorMessage: "Password should be 8-20 characters and include atleast 1 letter, 1 number and 1 special character",
-      label: "Password",
-      pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$",
+      name: "gender",
+      type: "text",
+      placeholder: "Gender",
+      errorMessage: "Gender should be 3-10 characters and shouldn't include special characters",
+      label: "Gender",
+      pattern: "^[A-Za-z]{3,10}$",
       required: true
     },
     {
       id: 6,
-      name: "Confirm Password",
-      type: "password",
-      placeholder: "Confirm Password",
-      errorMessage: "Passwords don't match",
-      label: "Confirm Password",
-      pattern: values.password,
+      name: "group",
+      type: "text",
+      placeholder: "Group",
+      errorMessage: "Group should be among work,family,friends,other,school",
+      label: "Group",
+      pattern: "^[A-Za-z]{3,10}$",
       required: true
-    }
+    },
   ]
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    fetch('http://localhost:3031/users', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(values)
+    })
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
   }
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
-  console.log(values)
   return (
     <>
       <div className='min-height'>
