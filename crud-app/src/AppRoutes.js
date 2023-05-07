@@ -5,6 +5,7 @@ import Home from './components/Home/Home';
 import ContactForm from './components/FormInput/ContactForm';
 import Root from './Root';
 import DisplayContacts from './components/DisplayContacts/DisplayContacts';
+import UpdateContact from './components/UpdateContact/UpdateContact';
 
 function AppRoutes() {
   const router = createBrowserRouter([
@@ -36,6 +37,11 @@ function AppRoutes() {
         {
           path: '/groups',
           element: <DisplayContacts />,
+          errorElement: <ErrorPage />
+        },
+        {
+          path: '/update/:contact',
+          element: <UpdateContact />,
           errorElement: <ErrorPage />
         },
       ]

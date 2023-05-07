@@ -1,0 +1,13 @@
+select {
+    padding: 1.5vh 2vh;
+    margin: 10px 0 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.formInput select:invalid[focused="true"] ~ span{
+    display: block !important;
+}
+
+.formInput select:invalid[focused="true"]{
+    border-color: red;
+}
