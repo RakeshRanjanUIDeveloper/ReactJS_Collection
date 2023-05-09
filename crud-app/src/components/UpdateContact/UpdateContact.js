@@ -9,12 +9,9 @@ function UpdateContact() {
     const { contact } = useParams();
     const userData = useSelector(state => state.totalContacts);
     const dispatch = useDispatch();
-
     const [selectedContact, setSelectedContact] = useState({});
-    
     const contactMain = userData;
-
-
+    
     useEffect(() => {
         let urlString = 'http://localhost:3031/users';
 

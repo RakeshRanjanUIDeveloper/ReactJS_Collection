@@ -10,7 +10,6 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <AppRoutes />
-        <Footer />
       </div>
     </Provider>
   );
