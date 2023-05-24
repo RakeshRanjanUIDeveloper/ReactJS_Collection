@@ -153,3 +153,12 @@ $grid-width : 25%;
   background-color: rgb(220, 220, 220);
 }
 
+
+@import '../../assets/styles/style.scss';
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
