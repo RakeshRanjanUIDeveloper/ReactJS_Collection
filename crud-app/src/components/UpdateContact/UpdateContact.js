@@ -1,33 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FormInput from '../FormInput/FormInput';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchContacts } from '../../appRedux/contacts/ContactsActions';
+import { useSelector } from 'react-redux';
 
 function UpdateContact() {
-
-    const { contact } = useParams();
+    const { contactId } = useParams();
     const userData = useSelector(state => state.totalContacts);
-    const dispatch = useDispatch();
     const [selectedContact, setSelectedContact] = useState({});
-    const contactMain = userData;
-    
+
     useEffect(() => {
-        let urlString = 'http://localhost:3031/users';
-
-        console.log(contact);
-
-        urlString += "?";
-        urlString += 'contact=' + contact;
-        
-        console.log(urlString)
-        dispatch(fetchContacts(urlString))
+        setSelectedContact(userData.filter(item => item.id.includes(contactId)));
         // eslint-disable-next-line 
-      }, [])
-
-      useEffect(() => {
-        setSelectedContact(userData);
-      }, [])
+    }, [])
 
     const inputs = [
         {
@@ -92,27 +76,28 @@ function UpdateContact() {
         },
     ]
 
-    function handleSubmit(event){
+    function handleSubmit(event) {
         event.preventDefault();
-        console.log(contact);
-        let urlString = "?";
-        urlString += 'contact=' + contact;
-
-        fetch('http://localhost:3031/users'+urlString, {
-            method: 'POST',
+        fetch(`http://localhost:3031/users/${contactId}`, {
+            method: 'PUT',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(selectedContact)
-          })
-            .then(response => response.json())
-            .then(data => console.log(data))
+            body: JSON.stringify(selectedContact[0])
+        })
+            .then(
+                data => {
+                    alert("Your contact has been updated successfully, you will be redirected to all contacts page");
+                    const timeout = setTimeout(() => {
+                        window.location.replace('http://localhost:3000/all-contacts');
+                    }, 1000);
+                    timeout()
+                }
+
+            )
             .catch(error => console.error(error));
-            alert("Your contact has been updated successfully, you will be redirected to all contacts page");
-              const timeout = setTimeout(() => {
-                window.location.replace('http://localhost:3000/all-contacts');
-            }, 1000);
     }
     const onChangeSelected = (e) => {
-        setSelectedContact({ ...selectedContact, [e.target.name]: e.target.value })
+        console.log(selectedContact[0])
+        setSelectedContact([{ ...selectedContact[0], [e.target.name]: e.target.value }])
     }
 
     return (
@@ -144,7 +129,7 @@ function UpdateContact() {
                             <input name="username" type="text" placeholder="Username" pattern="^[A-Za-z0-9]{3,16}$" required="" focused="true" value={selectedContact.name} onChange={e => setSelectedContact({...selectedContact, username: e.target.value})}/>
                             <span>Username should be 3-16 characters and shouldn't include special characters</span>
                         </div> */}
-                        
+
                         <button>Submit</button>
                     </form>
                 </div>

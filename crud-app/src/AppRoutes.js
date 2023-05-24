@@ -40,7 +40,7 @@ function AppRoutes() {
           errorElement: <ErrorPage />
         },
         {
-          path: '/update/:contact',
+          path: '/update/:contactId',
           element: <UpdateContact />,
           errorElement: <ErrorPage />
         },

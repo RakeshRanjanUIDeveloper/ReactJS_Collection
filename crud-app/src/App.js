@@ -1,5 +1,4 @@
 import './App.css';
-import Footer from './components/Footer/Footer';
 import AppRoutes from './AppRoutes';
 import { Provider } from 'react-redux';
 import { store } from './appRedux/store';
